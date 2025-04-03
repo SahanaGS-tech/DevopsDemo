@@ -25,7 +25,7 @@ items_db = [
 # Root endpoint
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Demo API"}
+    return {"message": "Welcome to the Demo API is finaally deployed"}
 
 # Get all items
 @app.get("/items", response_model=List[Item])
