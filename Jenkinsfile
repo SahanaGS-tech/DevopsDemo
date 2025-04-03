@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh '''
                     # Run this on the host where Docker is working
-                    ssh vboxuser@host.docker.internal "cd ${WORKSPACE} && docker build -t ${DOCKER_IMAGE} ."
+                    ssh vboxuser@hostname -I | awk '{print $1}' "cd ${WORKSPACE} && docker build -t ${DOCKER_IMAGE} ."
                 '''
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                     # Run these commands on the host
-                    ssh vboxuser@host.docker.internal "cd ${WORKSPACE} && \
+                    ssh vboxuser@hostname -I | awk '{print $1}' "cd ${WORKSPACE} && \
                     minikube image load ${DOCKER_IMAGE} && \
                     kubectl create namespace dev --dry-run=client -o yaml | kubectl apply -f - && \
                     sed -i 's|image: fastapi-app:latest|image: ${DOCKER_IMAGE}|g' deployment.yaml && \
