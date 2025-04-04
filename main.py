@@ -25,8 +25,7 @@ items_db = [
 # Root endpoint
 @app.get("/")
 def read_root():
-    # Intentionally introducing a failure
-    raise HTTPException(status_code=500, detail="Intentional server error for testing purposes")
+    return {"meassage": "A simple FastAPI application"}
 
 # Get all items
 @app.get("/items", response_model=List[Item])
