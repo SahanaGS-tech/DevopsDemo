@@ -25,7 +25,8 @@ items_db = [
 # Root endpoint
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Demo API is finaally deployed"}
+    # Intentionally introducing a failure
+    raise HTTPException(status_code=500, detail="Intentional server error for testing purposes")
 
 # Get all items
 @app.get("/items", response_model=List[Item])
